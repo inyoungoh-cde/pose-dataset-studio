@@ -1,0 +1,26 @@
+# Captured sequences and everything the pipeline writes into them.
+# A sequence folder is data, not code: it holds thousands of frames plus the
+# labels, masks, clouds and cfg generated from them. Keep them out of git and
+# move the finished folder to singleshotpose's data root instead.
+/*/JPEGImages/
+/*/depth/
+/*/intrinsics.json
+/*/objmask/
+/*/labels/
+/*/mask/
+/*/transforms/
+/*/seg_preview/
+/*/qa_preview/
+/*/e2e_log/
+*.ply
+*.npy
+*.data
+train.txt
+test.txt
+training_range.txt
+log.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/

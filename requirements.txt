@@ -1,0 +1,52 @@
+# Dependencies — tested with uv + Python 3.10 on Linux (A100) and, for the
+# CPU pipeline, on Windows. Three-layer setup, from the folder ABOVE this one:
+#
+#   # 1) core pipeline (steps 2-6 and the studio)
+#   uv venv --python 3.10 .venv
+#   uv pip install --python .venv -r pose-dataset-studio/requirements.txt
+#
+#   # 2) automatic object segmentation + GPU acceleration
+#   #    (steps 3a/3b, the --gpu paths, the live mask preview)
+#   uv pip install --python .venv "sam2==1.1.0" "transformers==5.15.0"
+#
+#   # 3) recording with an Azure Kinect (step 1 only)
+#   uv pip install --python .venv --no-deps pykinect-azure
+#
+# Layer 2 notes (SAM 2 + Grounding DINO):
+# - nothing is compiled locally: sam2 and transformers are pure-Python/PyTorch
+#   packages, and `torch` is pulled in automatically (Linux: CUDA wheels;
+#   verified with torch 2.13.0+cu130).
+# - the two model checkpoints (facebook/sam2.1-hiera-large,
+#   IDEA-Research/grounding-dino-base, ~1.6 GB total) download from the
+#   Hugging Face hub on the FIRST run and are cached in ~/.cache/huggingface.
+#   Machines without internet: copy that cache folder over, or pass local
+#   paths via --sam2-model / --detector-model.
+# - installing layer 2 does NOT move the pins below (verified with uv's
+#   resolver: numpy stays 1.26.4, opencv stays 4.6.0.66).
+# - without layer 2 the pipeline still runs end to end -- segment the object
+#   by hand in CloudCompare instead of steps 3a/3b, and skip --gpu.
+#
+# GPU acceleration (the --gpu path inside steps 2, 3 and 3b)
+# additionally relies on open3d's CUDA build, which the Linux pip wheel below
+# already ships (open3d.core.cuda.is_available() must be True). The Windows
+# wheel is CPU-only, so on Windows simply omit --gpu: every step keeps its CPU
+# path as the default.
+#
+# Layer 3 note: pykinect-azure is installed with --no-deps because it declares
+# opencv-python, which would overwrite opencv-contrib-python (both ship the
+# same `cv2` package -- never install both). Everything it actually needs
+# (cv2, numpy) is already provided below. The Azure Kinect Sensor SDK must be
+# installed separately (it is not a pip package).
+
+numpy==1.26.4                      # <2 required by the opencv 4.6 wheels
+opencv-contrib-python==4.6.0.66    # verified configuration; the ArUco shims
+                                   # also cover the >=4.7 API. contrib build
+                                   # = main modules + aruco
+open3d==0.19.0                     # registration shim path; the Linux wheel
+                                   # includes the CUDA module used by the
+                                   # *_gpu_* drop-ins
+trimesh
+scipy
+pykdtree
+pypng
+tqdm
