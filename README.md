@@ -45,7 +45,7 @@ Verified end to end in a fresh venv built exactly as above: steps 2–6 and the 
 
 ### Try it without a Kinect
 
-No Azure Kinect on hand? [`dig_camera.zip`](https://github.com/inyoungoh-cde/mr-remote-collaboration/releases/tag/dataset-toolchain-sample-v1) is a real capture (529 frames) — step 1's output, so it lets you start at step 2:
+No Azure Kinect on hand? [`dig_camera.zip`](https://github.com/inyoungoh-cde/pose-dataset-studio/releases/tag/pose-dataset-studio-sample-v1) is a real capture (529 frames) — step 1's output, so it lets you start at step 2:
 
 ```bash
 unzip dig_camera.zip -d pose-dataset-studio/
