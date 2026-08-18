@@ -74,7 +74,7 @@ Two quick sanity checks after a run: `seg_preview/contact.jpg` shows the tracked
 
 ## Citation
 
-If you use this toolchain, please cite:
+The ground-truth pose pipeline this studio automates was developed for the paper below — please cite it if this tool contributes to your research:
 
 ```bibtex
 @article{oh2026mixed,

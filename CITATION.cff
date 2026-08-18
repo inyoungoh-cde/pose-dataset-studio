@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: >-
+  If this tool contributes to your research, please cite the paper below
+  (preferred-citation), which developed the ground-truth pose pipeline this
+  studio automates. To reference the software itself, cite this repository.
+title: pose-dataset-studio
+type: software
+authors:
+  - family-names: Oh
+    given-names: Inyoung
+repository-code: https://github.com/inyoungoh-cde/pose-dataset-studio
+license: MIT
+preferred-citation:
+  type: article
+  title: A mixed reality-based remote collaboration framework using improved pose estimation
+  authors:
+    - family-names: Oh
+      given-names: Inyoung
+    - family-names: Jang
+      given-names: Gilsang
+    - family-names: Song
+      given-names: Jinho
+    - family-names: Son
+      given-names: Moongu
+    - family-names: Kim
+      given-names: Daewoon
+    - family-names: Yun
+      given-names: Junsang
+    - family-names: Ko
+      given-names: Kwanghee
+  journal: Computers in Industry
+  volume: 174
+  start: 104414
+  year: 2026
+  doi: 10.1016/j.compind.2025.104414
