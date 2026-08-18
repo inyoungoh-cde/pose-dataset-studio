@@ -49,7 +49,7 @@ What `--gpu` changes -- nothing else:
 Pose graph assembly and global optimization are the original Open3D CPU calls
 on both paths. Differences between the two paths' output come only from
 voxel-downsample implementation details (CUDA vs legacy grid averaging)
-feeding the edge weights; measured on `box`: see doc/DETAILS.md §9.
+feeding the edge weights.
 """
 import collections
 import concurrent.futures as futures
@@ -315,7 +315,7 @@ def detect_capture_mode(path, n_frames):
 
 def crop_to_marker_region(pcd, corners_3d, margin=0.15):
      """Keep only points near the markers, so a static-camera ICP fallback
-     cannot lock onto the unmoving background (see doc/DETAILS.md §4)."""
+     cannot lock onto the unmoving background."""
      pts = np.array([c for m in corners_3d for c in m if c[2] > 0])
      if len(pts) < 4:
           return pcd

@@ -101,7 +101,7 @@ for _s in (
 STAGE_ORDER = list(STAGES)  # insertion order == pipeline order
 
 # How each stage that can use a GPU spells it. There is one script per step;
-# the GPU path is a flag inside it (DETAILS.md §9), so the front-end only has
+# the GPU path is a flag inside it, so the front-end only has
 # to pass the right argument -- never a different file. The child always sees
 # a single device (CUDA_VISIBLE_DEVICES, set in _cmd_for), hence index 0.
 GPU_ARGS = {"step2": ["--gpu", "0"],
@@ -942,8 +942,7 @@ def add_e2e_args(parser):
                              "gets GPU 1 to itself while it overlaps steps 2-3 (the one "
                              "place two stages share a device; saves a few percent). "
                              "Bare '--gpu' = 'auto' (the freest device). Omit entirely "
-                             "= CPU only. Output is measured-equivalent either way "
-                             "(DETAILS.md §9)")
+                             "= CPU only. Output is measured-equivalent either way")
     parser.add_argument("--no-parallel", action="store_true",
                         help="do not overlap step3a with step2/step3 (they are "
                              "independent and normally run side by side)")

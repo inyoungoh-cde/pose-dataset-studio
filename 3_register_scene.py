@@ -15,8 +15,7 @@ always has and remains the reference. With `--gpu N` the merge runs on CUDA
 device N: same inputs, same output (`registeredScene.ply`), same vote-merge
 semantics -- only faster.
 
-What is slow on the CPU path, and what the GPU path replaces it with (measured
-numbers in doc/DETAILS.md §9):
+What is slow on the CPU path, and what the GPU path replaces it with:
 
 1. **Frame loading** decodes each 16-bit depth PNG with `pypng`, a pure-Python
    decoder, one frame at a time. Replaced by `cv2.imread(IMREAD_UNCHANGED)`
@@ -437,7 +436,7 @@ def main():
             print("Merge radius: %.4f m (markers not found in frame 0, using the "
                   "config default)" % voxel_Radius)
         else:
-            # one depth pixel at the board's range (see doc/DETAILS.md §4)
+            # one depth pixel at the board's range
             board_range = float(np.linalg.norm(board_centre))
             voxel_Radius = board_range / fx
             print("Merge radius: %.4f m (auto = one depth pixel at the board's range of "

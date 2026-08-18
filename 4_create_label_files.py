@@ -239,7 +239,7 @@ def DoLabel(path, number, defaultSnumber=100000, class_label=0,
             pcd,
             o3d.utility.DoubleVector([radius, radius * 2]))
 
-        # forward the input cloud's vertex colours to the mesh (see doc/DETAILS.md §4)
+        # forward the input cloud's vertex colours to the mesh
         vertex_colors = np.asarray(pointcloud.vertex_colors)
         if vertex_colors.size:
             vertex_colors = (vertex_colors * 255).astype(np.uint8)
@@ -261,7 +261,7 @@ def DoLabel(path, number, defaultSnumber=100000, class_label=0,
 
         # Put the centroid on the origin: label keypoint 0 (mesh.centroid) and
         # singleshotpose's first model point (the origin) must be the same
-        # physical point. See doc/DETAILS.md §4.
+        # physical point.
         centroid_obb = np.array(mesh.centroid, dtype=np.float64)
         mesh.apply_translation(-centroid_obb)
         Tform = trimesh.transformations.translation_matrix(-centroid_obb).dot(Tform)
